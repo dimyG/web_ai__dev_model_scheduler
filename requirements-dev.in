@@ -1,0 +1,5 @@
+-r requirements.txt
+mypy
+black
+ipykernel
+pip-tools
