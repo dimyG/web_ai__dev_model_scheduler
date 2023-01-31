@@ -3,3 +3,4 @@ mypy
 black
 ipykernel
 pip-tools
+matplotlib
