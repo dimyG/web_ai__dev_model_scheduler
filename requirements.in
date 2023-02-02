@@ -4,4 +4,5 @@ diffusers[torch]
 transformers
 scipy
 ftfy
+xformers
 # end ml packages

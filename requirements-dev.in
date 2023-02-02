@@ -4,3 +4,4 @@ black
 ipykernel
 pip-tools
 matplotlib
+notebook

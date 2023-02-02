@@ -68,12 +68,15 @@ jinja2==3.1.2
     # via fastapi
 markupsafe==2.1.2
     # via jinja2
+mypy-extensions==0.4.3
+    # via typing-inspect
 numpy==1.24.1
     # via
     #   accelerate
     #   diffusers
     #   scipy
     #   transformers
+    #   xformers
 orjson==3.8.5
     # via fastapi
 packaging==23.0
@@ -87,6 +90,8 @@ psutil==5.9.4
     # via accelerate
 pydantic==1.10.4
     # via fastapi
+pyre-extensions==0.0.23
+    # via xformers
 python-dotenv==0.21.1
     # via uvicorn
 python-multipart==0.0.5
@@ -126,6 +131,7 @@ torch==1.13.1
     # via
     #   accelerate
     #   diffusers
+    #   xformers
 tqdm==4.64.1
     # via
     #   huggingface-hub
@@ -136,7 +142,11 @@ typing-extensions==4.4.0
     # via
     #   huggingface-hub
     #   pydantic
+    #   pyre-extensions
     #   torch
+    #   typing-inspect
+typing-inspect==0.8.0
+    # via pyre-extensions
 ujson==5.7.0
     # via fastapi
 urllib3==1.26.14
@@ -149,5 +159,7 @@ wcwidth==0.2.6
     # via ftfy
 websockets==10.4
     # via uvicorn
+xformers==0.0.16
+    # via -r requirements.in
 zipp==3.11.0
     # via importlib-metadata
