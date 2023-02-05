@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../deployment/.idea/deployment.iml" filepath="$PROJECT_DIR$/../../deployment/.idea/deployment.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/model_scheduler_src.iml" filepath="$PROJECT_DIR$/.idea/model_scheduler_src.iml" />
     </modules>
   </component>

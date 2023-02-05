@@ -2,30 +2,28 @@
 import torch
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 import os
-from pathlib import Path
-from dotenv import load_dotenv
 # import matplotlib.pyplot as plt
 from PIL import Image
 # from xformers.ops import MemoryEfficientAttentionFlashAttentionOp
 
-src_path = Path('.')
-env_path = src_path / '.env'
-load_dotenv(dotenv_path=env_path)  # load environment variables from .env file into the os.environ object.
+
 huggingface_access_token = os.environ.get("HUGGINGFACE_ACCESS_TOKEN")
 
 
-def load_pipeline(model: str = "stabilityai/stable-diffusion-2", revision: str = "fp16") -> StableDiffusionPipeline:
+def load_pipeline(model: str = "stabilityai/stable-diffusion-2", revision: str = "fp16", cache_dir: str = None) -> StableDiffusionPipeline:
     """ Important: The diffusion models are large (~2.5GB) so loading the pipeline in memory from disk is time-consuming.
     It is recommended to load the pipeline on host start, and then reuse it for all images you want to generate.
     :param model: The name of the model to load.
     :param revision: The precision of the loaded weights. By default we load the float16 precision model branch
+    :param cache_dir: The local directory where the models are stored. If None, the default cache directory is used.
     (instead of float32)
     """
     print('loading pipeline...')
     torch_dtype = torch.float16  # telling diffusers to expect the weights to be in float16 precision
     scheduler = EulerDiscreteScheduler.from_pretrained(model, subfolder="scheduler")
-    pipe = StableDiffusionPipeline.from_pretrained(model, revision=revision, scheduler=scheduler,
-                                                   torch_dtype=torch_dtype, use_auth_token=huggingface_access_token)
+    pipe = StableDiffusionPipeline.from_pretrained(
+        model, cache_dir=cache_dir, revision=revision, scheduler=scheduler, local_files_only=False,
+        return_cached_folder=False, torch_dtype=torch_dtype, use_auth_token=huggingface_access_token)
     return pipe
 
 
