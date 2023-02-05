@@ -14,15 +14,17 @@ load_dotenv(dotenv_path=env_path)  # load environment variables from .env file i
 huggingface_access_token = os.environ.get("HUGGINGFACE_ACCESS_TOKEN")
 
 
-def load_pipeline():
-    # Important: The diffusion models are large (~2.5GB) so loading the pipeline in memory from disk is time-consuming.
-    # It is recommended to load the pipeline on host start, and then reuse it for all images you want to generate.
-    model1 = "CompVis/stable-diffusion-v1-4"
-    model2 = "stabilityai/stable-diffusion-2"
-    revision = "fp16"  # loading the weights from the float16 precision branch (instead of float32)
+def load_pipeline(model: str = "stabilityai/stable-diffusion-2", revision: str = "fp16") -> StableDiffusionPipeline:
+    """ Important: The diffusion models are large (~2.5GB) so loading the pipeline in memory from disk is time-consuming.
+    It is recommended to load the pipeline on host start, and then reuse it for all images you want to generate.
+    :param model: The name of the model to load.
+    :param revision: The precision of the loaded weights. By default we load the float16 precision model branch
+    (instead of float32)
+    """
+    print('loading pipeline...')
     torch_dtype = torch.float16  # telling diffusers to expect the weights to be in float16 precision
-    scheduler = EulerDiscreteScheduler.from_pretrained(model2, subfolder="scheduler")
-    pipe = StableDiffusionPipeline.from_pretrained(model2, revision=revision, scheduler=scheduler,
+    scheduler = EulerDiscreteScheduler.from_pretrained(model, subfolder="scheduler")
+    pipe = StableDiffusionPipeline.from_pretrained(model, revision=revision, scheduler=scheduler,
                                                    torch_dtype=torch_dtype, use_auth_token=huggingface_access_token)
     return pipe
 

@@ -129,6 +129,7 @@ tokenizers==0.13.2
     # via transformers
 torch==1.13.1
     # via
+    #   -r requirements.in
     #   accelerate
     #   diffusers
     #   xformers

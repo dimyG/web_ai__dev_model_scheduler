@@ -16,8 +16,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+model1 = "CompVis/stable-diffusion-v1-4"
+model2 = "stabilityai/stable-diffusion-2"
 # load the pipeline in memory on host start, and then reuse it for all images you want to generate.
-pipe = load_pipeline()
+pipe = load_pipeline(model1)
 
 
 @app.get("/")
