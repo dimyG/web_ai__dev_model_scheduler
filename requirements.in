@@ -1,7 +1,7 @@
 fastapi[all]
 # ml packages
-# torch==1.13.1 --extra-index-url https://download.pytorch.org/whl/cu117  # 11.7 gpu version for windows
-torch==1.13.1 # 11.7 gpu version for linux
+# torch==1.13.1 --extra-index-url https://download.pytorch.org/whl/cu117  # cuda 11.7 gpu version for windows
+torch==1.13.1 # cuda 11.7 gpu version for linux
 diffusers[torch]
 transformers
 scipy

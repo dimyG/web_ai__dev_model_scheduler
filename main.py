@@ -14,6 +14,7 @@ load_dotenv(dotenv_path=env_path)  # load environment variables from .env file i
 
 # We read the defined cache dir from the env file, and then we use the cache_dir parameter to use it.
 # Using the cache_dir parameter could be avoided if we set the HUGGINGFACE_HUB_CACHE environment variable on the shell.
+# But it doesn't work just by adding it in the env file, so we read it from the env file and then set it manually.
 huggingface_hub_cache = os.environ.get("HUGGINGFACE_HUB_CACHE")
 print("huggingface_hub_cache:", huggingface_hub_cache)
 
@@ -31,7 +32,7 @@ app.add_middleware(
 
 model1 = "CompVis/stable-diffusion-v1-4"
 model2 = "stabilityai/stable-diffusion-2"
-print('cache dir:', try_to_load_from_cache(model2, 'snapshots/2880f2ca379f41b0226444936bb7a6766a227587/model_index.json'))
+# print('cache dir:', try_to_load_from_cache(model2, 'snapshots/2880f2ca379f41b0226444936bb7a6766a227587/model_index.json'))
 # print(scan_cache_dir())
 
 # load the pipeline in memory on host start, and then reuse it for all images you want to generate.
@@ -40,7 +41,7 @@ pipe = load_pipeline(model2, cache_dir=huggingface_hub_cache)
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    return {"Hello": "the World"}
 
 
 @app.post("/generate_image/")
