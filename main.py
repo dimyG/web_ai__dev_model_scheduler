@@ -48,7 +48,7 @@ if not debug:
 
 @app.get("/")
 async def read_root():
-    return {"Hello": " er World"}
+    return {"Hello": "World"}
 
 
 @app.post("/generate_image/", response_model=None)
